@@ -8,9 +8,12 @@ package banco;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -42,6 +45,10 @@ private TableRowSorter<IngresoGastoTableModel>sorter;
         sortKeys.add(new RowSorter.SortKey(0,SortOrder.ASCENDING));
         sorter.setSortKeys(sortKeys);
         sort.setSortKeys(sortKeys);
+          DefaultComboBoxModel dcm= new DefaultComboBoxModel();
+        for(UIManager.LookAndFeelInfo lfi:UIManager.getInstalledLookAndFeels())
+            dcm.addElement(lfi.getName());
+        jComboBox1.setModel(dcm);
     
     }
 
@@ -66,6 +73,7 @@ private TableRowSorter<IngresoGastoTableModel>sorter;
         jTextFieldBalance = new javax.swing.JTextField();
         jTextFieldFiltro = new javax.swing.JTextField();
         jButtonfiltrar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItemIngreso = new javax.swing.JCheckBoxMenuItem();
@@ -109,6 +117,13 @@ private TableRowSorter<IngresoGastoTableModel>sorter;
         jButtonfiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonfiltrarActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -160,7 +175,9 @@ private TableRowSorter<IngresoGastoTableModel>sorter;
                                 .addComponent(jTextFieldBalance)))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(17, 17, 17)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonfiltrar)
@@ -190,7 +207,9 @@ private TableRowSorter<IngresoGastoTableModel>sorter;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonfiltrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldFiltro))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldFiltro)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29))
         );
 
@@ -235,6 +254,17 @@ private TableRowSorter<IngresoGastoTableModel>sorter;
           sorter.setRowFilter(rf);
            sort.setRowFilter(rf);
     }//GEN-LAST:event_jButtonfiltrarActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+                                                 
+      try{
+        UIManager.LookAndFeelInfo lookandFeel=UIManager.getInstalledLookAndFeels()[jComboBox1.getSelectedIndex()]; 
+        UIManager.setLookAndFeel(lookandFeel.getClassName());
+           SwingUtilities.updateComponentTreeUI(this);
+       
+       
+       }catch(Throwable e){}
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,6 +316,7 @@ private TableRowSorter<IngresoGastoTableModel>sorter;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonfiltrar;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItemIngreso;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
